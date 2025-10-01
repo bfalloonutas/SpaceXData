@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views import generic
+from .apiClient import get_data
 import requests
 
 # Create your views here.
@@ -10,23 +11,36 @@ def Home(request):
     return HttpResponse(name)
 
 
-class Launches(generic.ListView):
+def Launches(request):
     template_name = "ForSpaceEnthusiasts/launches.html"
-    #Get Json data to override model default
-    def get_queryset(self):
-        response = requests.get('https://api.spacexdata.com/v5/launches/latest')
-        return response.json
+    #get data from the api, pass in the last part of url
+    launches = get_data('launches')
+    #pass results as context as list
+    context = {'launches_list' : launches}
+    #ship it off to the template
+    return render(request, template_name, context)
+        
 
-class Crews(generic.ListView):
+def Crews(request):
+    
     template_name = "ForSpaceEnthusiasts/crew.html"
-    #Get Json data to override model default
-    def get_queryset(self):
-        response = requests.get('https://api.spacexdata.com/v5/launches/latest')
-        return response.json
+    #get data from the api, pass in the last part of url
+    crews = get_data('crew')
+    #pass results as context as list
+    context = {'crew_list' : crews}
+    #ship it off to the template
+    return render(request, template_name, context)
+    
+    
+    
 
-class Payloads(generic.ListView):
+def Payloads(request):
     template_name = "ForSpaceEnthusiasts/payload.html"
-        #Get Json data to override model default
-    def get_queryset(self):
-        response = requests.get('https://api.spacexdata.com/v5/launches/latest')
-        return response.json
+    #get data from the api, pass in the last part of url
+    payloads = get_data('payloads')
+    #pass results as context as list
+    context = {'payload_list' : payloads}
+    #ship it off to the template
+    return render(request, template_name, context)
+
+    

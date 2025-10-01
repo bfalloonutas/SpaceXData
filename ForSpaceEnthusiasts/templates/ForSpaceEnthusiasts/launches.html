@@ -1,4 +1,9 @@
 <!DOCTYPE html>
 <html>
     <h1>This is the Launches Page<h1>
+        <ul>
+            {% for launch in launches_list%}
+                <li>{{launch.id}}</li>
+            {% endfor %}    
+        </ul>
 </html>

@@ -1,4 +1,9 @@
 <!DOCTYPE html>
 <html>
     <h1>This is the Payload Page<h1>
+        <ul>
+            {% for payload in payload_list%}
+                <li>{{payload.name}}</li>
+            {% endfor %}    
+        </ul>
 </html>
