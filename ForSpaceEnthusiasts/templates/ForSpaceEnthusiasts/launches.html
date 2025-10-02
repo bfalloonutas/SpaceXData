@@ -3,7 +3,7 @@
     <h1>This is the Launches Page<h1>
         <ul>
             {% for launch in launches_list%}
-                <li>{{launch.id}}</li>
+                <li>{{launch.id}} Launched on {{launch.date_utc}}</li>
             {% endfor %}    
         </ul>
 </html>

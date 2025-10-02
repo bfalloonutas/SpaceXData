@@ -1,29 +1,33 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from django.views import generic
 from .apiClient import get_data
-import requests
+
 
 # Create your views here.
 
+template_base = "ForSpaceEnthusiasts/"
+
 def Home(request):
-    name = print("Hello this is the Home Page, Welcome to my project")
-    return HttpResponse(name)
+    template_name = template_base + "home.html"
+    context = {"home" : "This is the home page"}
+    return render(request, template_name, context)
 
 
 def Launches(request):
-    template_name = "ForSpaceEnthusiasts/launches.html"
+    template_name = template_base + "launches.html"
     #get data from the api, pass in the last part of url
     launches = get_data('launches')
+
+    #Sort Launches by date.
+    launches_sorted = sorted(launches, key=lambda launch: launch["date_unix"], reverse=True)
     #pass results as context as list
-    context = {'launches_list' : launches}
+    context = {'launches_list' : launches_sorted}
     #ship it off to the template
     return render(request, template_name, context)
         
 
 def Crews(request):
     
-    template_name = "ForSpaceEnthusiasts/crew.html"
+    template_name = template_base + "crew.html"
     #get data from the api, pass in the last part of url
     crews = get_data('crew')
     #pass results as context as list
@@ -35,7 +39,7 @@ def Crews(request):
     
 
 def Payloads(request):
-    template_name = "ForSpaceEnthusiasts/payload.html"
+    template_name = template_base + "payload.html"
     #get data from the api, pass in the last part of url
     payloads = get_data('payloads')
     #pass results as context as list

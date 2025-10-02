@@ -1,5 +1,5 @@
 import requests
-import json
+import datetime
 
 
 
@@ -18,6 +18,11 @@ def get_data(page):
     else:
         error_msg = "Could not fetch data on" + page
         return error_msg
+
+
+
+
+
 
 
 
