@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html>
+{% extends "./base.html" %}
+{% block content %}
+
     <h1>This is the Crew Page<h1>
-        <ul>
-            {% for crew in crew_list%}
-                <li>{{crew.name}}</li>
-            {% endfor %}    
-        </ul>
-  
-</html>
+    <ul>
+        {% for crew in crew_list%}
+            <li>{{crew.name}}</li>
+        {% endfor %}    
+    </ul>
+
+{% endblock content %}
