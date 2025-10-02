@@ -30,8 +30,10 @@ def Crews(request):
     template_name = template_base + "crew.html"
     #get data from the api, pass in the last part of url
     crews = get_data('crew')
+    #Sort crew by name,
+    crews_sorted = sorted(crews, key=lambda crew: crew["name"])
     #pass results as context as list
-    context = {'crew_list' : crews}
+    context = {'crew_list' : crews_sorted}
     #ship it off to the template
     return render(request, template_name, context)
     
@@ -42,8 +44,10 @@ def Payloads(request):
     template_name = template_base + "payload.html"
     #get data from the api, pass in the last part of url
     payloads = get_data('payloads')
+    #Sort payloads by name
+    payloads_sorted = sorted(payloads, key=lambda payload: payload["name"])
     #pass results as context as list
-    context = {'payload_list' : payloads}
+    context = {'payload_list' : payloads_sorted}
     #ship it off to the template
     return render(request, template_name, context)
 
