@@ -2,10 +2,12 @@
 {% block content %}
 
      
-    <h1>This is the Launches Page<h1>
-        <ul>
-            {% for launch in launches_list%}
-                <li>{{launch.id}} Launched on {{launch.date_utc}}</li>
-            {% endfor %}    
-        </ul>
+    <div class="content">
+    <h1 class="title">This is the Launches Page<h1>
+                {% for launch in launches_list%}
+                    <div class = "containers">
+                        <p>{{launch.id}} Launched on {{launch.date_utc}}</p>
+                    </div>
+                {% endfor %}    
+    <div>
 {% endblock content %}

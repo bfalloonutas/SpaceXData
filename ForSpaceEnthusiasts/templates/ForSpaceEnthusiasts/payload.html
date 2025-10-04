@@ -1,9 +1,13 @@
 {% extends "./base.html" %}
 {% block content %}
-    <h1>This is the Payload Page<h1>
-        <ul>
-            {% for payload in payload_list%}
-                <li>{{payload.name}}</li>
-            {% endfor %}    
-        </ul>
+    <div class="content">
+        <h1 class="title">This is the Payload Page<h1>
+        <div class = "containers">
+            <ul>
+                {% for payload in payload_list%}
+                    <li>{{payload.name}}</li>
+                {% endfor %}    
+            </ul>
+        </div> 
+    <div>
 {% endblock content %}
