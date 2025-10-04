@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .apiClient import get_data
-
+from datetime import datetime
 
 # Create your views here.
 
@@ -19,6 +19,14 @@ def Launches(request):
 
     #Sort Launches by date.
     launches_sorted = sorted(launches, key=lambda launch: launch["date_unix"], reverse=True)
+    
+    #Format dates for publishing
+    for launch in launches_sorted:
+        get_date = datetime.fromtimestamp(launch["date_unix"])
+        format_date = get_date.strftime("%H:%M:%S %d %B %Y ")
+        launch["date_unix"] = format_date
+
+        
     #pass results as context as list
     context = {'launches_list' : launches_sorted}
     #ship it off to the template

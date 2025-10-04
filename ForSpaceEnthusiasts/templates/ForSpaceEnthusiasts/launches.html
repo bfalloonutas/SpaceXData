@@ -6,7 +6,12 @@
     <h1 class="title">This is the Launches Page<h1>
                 {% for launch in launches_list%}
                     <div class = "containers">
-                        <p>{{launch.id}} Launched on {{launch.date_utc}}</p>
+                        <img src={{launch.links.patch.small}} alt="Flight icon">
+                        <h3>{{launch.id}}</h3>
+                        <ul>
+                            <li>Launched on: {{launch.date_unix}}</li>
+                            <li></li>
+                        </ul>
                     </div>
                 {% endfor %}    
     <div>

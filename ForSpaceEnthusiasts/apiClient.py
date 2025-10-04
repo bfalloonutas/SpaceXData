@@ -1,7 +1,6 @@
 import requests
 
 
-
 def get_data(page):
     base_url = "https://api.spacexdata.com/v4/"
     #class requests.models.Response
@@ -18,6 +17,13 @@ def get_data(page):
         error_msg = "Could not fetch data on" + page
         return error_msg
 
+
+launches = get_data('launches')
+
+#Sort Launches by date.
+launches_sorted = sorted(launches, key=lambda launch: launch["date_unix"], reverse=True)
+
+    
 
 
 
