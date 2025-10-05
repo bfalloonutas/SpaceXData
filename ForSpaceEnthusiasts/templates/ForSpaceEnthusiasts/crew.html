@@ -4,12 +4,10 @@
     
     <div class="content">
         <h1 class="title">This is the Crew Page<h1>
-        <div class = "containers">
-            <ul>
                 {% for crew in crew_list%}
-                    <li>{{crew.name}}</li>
+                    <div class = "containers">
+                        <h3>{{crew.name}}</h3>
+                    </div>
                 {% endfor %}    
-            </ul>
-        </div>
     </div>
 {% endblock content %}

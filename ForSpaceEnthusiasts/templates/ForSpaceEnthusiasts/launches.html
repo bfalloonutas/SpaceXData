@@ -6,12 +6,11 @@
     <h1 class="title">This is the Launches Page<h1>
                 {% for launch in launches_list%}
                     <div class = "containers">
+                        {% if launch.links.patch.small is not None %}
                         <img src={{launch.links.patch.small}} alt="Flight icon">
-                        <h3>{{launch.id}}</h3>
-                        <ul>
-                            <li>Launched on: {{launch.date_unix}}</li>
-                            <li></li>
-                        </ul>
+                        {% endif %}
+                        <h3>Flight: {{launch.id}}</h3>
+                        <p>Launched on: {{launch.date_unix}}</p>
                     </div>
                 {% endfor %}    
     <div>
