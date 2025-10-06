@@ -5,6 +5,8 @@ Technologies
 
 request package for api get requests in python
 
+django-extensions package to allow for scripts to run on the django enviroment
+
 imported datetime to format dates
 
 Imported os for os.path.join(BASE_DIR, 'templates'), to allow navigation of templates in the html for the navbar

@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'ForSpaceEnthusiasts',
+    'django_extensions',
+    'ForSpaceEnthusiasts.apps.ForSpaceEnthusiastsConfig',
 ]
 
 MIDDLEWARE = [
