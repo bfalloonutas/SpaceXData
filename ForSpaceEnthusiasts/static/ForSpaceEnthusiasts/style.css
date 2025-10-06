@@ -1,7 +1,6 @@
 body {
     margin: 0;
     font-family: monospace, Arial, Helvetica, sans-serif;
-    display: flex;
 }
 
 .navbar {
@@ -31,18 +30,19 @@ body {
 
 
 .content {
-    margin-left: 220px;
+    margin-left: clamp(15px, 150px, 220px);
     padding: 20px;
-    flex-grow: 1;
-    
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, fr));
+    max-width: 600px;    
 } 
 
 .containers {
-    min-width: 300px;
-    max-width: max-content;
+    
     border: 1px solid #ddd;
     border-radius: 10px;
     padding: 15px;
+    margin-top: 15px;
     background-color: #fff;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     
@@ -54,6 +54,7 @@ body {
     margin-right: auto;
     height: 120px;
     width: 120px;
+    padding-bottom: 10px;
 }
 
 .containers h3 {
@@ -64,5 +65,10 @@ body {
 .containers p {
     font-size: 14px;
     color: #555;
+}
+
+.containers a {
+    text-decoration: none;
+    
 }
 

@@ -9,8 +9,10 @@
                         {% if launch.links.patch.small is not None %}
                         <img src={{launch.links.patch.small}} alt="Flight icon">
                         {% endif %}
-                        <h3>Flight: {{launch.id}}</h3>
+                        <h3>Flight number {{launch.flight_number}}</h3>
+                        <p>Name: {{launch.name}}</p>
                         <p>Launched on: {{launch.date_unix}}</p>
+                        
                     </div>
                 {% endfor %}    
     <div>

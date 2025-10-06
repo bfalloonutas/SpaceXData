@@ -18,6 +18,11 @@ def get_data(page):
         return error_msg
 
 
+payloads = get_data("payloads")
+
+for payload_manufacturers in payloads:
+    print(type(payload_manufacturers["manufacturers"]))
+    print(payload_manufacturers["manufacturers"])
 
     
 

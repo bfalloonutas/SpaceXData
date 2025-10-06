@@ -3,10 +3,12 @@
 
     
     <div class="content">
-        <h1 class="title">This is the Crew Page<h1>
+        <h1 class="title">Crew<h1>
                 {% for crew in crew_list%}
                     <div class = "containers">
                         <h3>{{crew.name}}</h3>
+                        <p>Agency: {{crew.agency}}
+                        <p>To learn more view their wikipedia page <a href="{{crew.wikipedia}}">here</a></p>
                     </div>
                 {% endfor %}    
     </div>

@@ -5,7 +5,19 @@
                 {% for payload in payload_list%}
                     <div class = "containers">
                         <h3>Payload: {{payload.name}}</h3>
-                     </div> 
+                        <p>Type: {{payload.type}}
+                        {% for manufacturer in payload.manufacturers %}
+                        <p>Manufacturer: {{ manufacturer }} 
+                        {% empty %}
+                        <p>No listed manufacturer</p>
+                        {% endfor %}
+                    </div>
+                {% empty %}            
+                    <div class = "containers">
+                        <h3>An error occured and no data for payloads could be found</h3>
+                        <p>Please reload</p>
+                    </div>
+                     
                 {% endfor %}    
        
     <div>
