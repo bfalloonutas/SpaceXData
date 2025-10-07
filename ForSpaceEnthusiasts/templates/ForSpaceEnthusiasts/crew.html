@@ -6,7 +6,10 @@
         <h1 class="title">Crew<h1>
                 {% for crew in crew_list%}
                     <div class = "containers">
+                        {% if crew.name is not None %}
                         <h3>{{crew.name}}</h3>
+                        {% endif %}
+
                         <p>Agency: {{crew.agency}}
                         <p>To learn more view their wikipedia page <a href="{{crew.wikipedia}}">here</a></p>
                     </div>

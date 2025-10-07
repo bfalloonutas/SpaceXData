@@ -13,3 +13,20 @@ Imported os for os.path.join(BASE_DIR, 'templates'), to allow navigation of temp
 
 
 Used chatgpt to generate the base of the html and css code for the navbar and containers 
+
+Run application 
+
+#1 Enter virtual enviroment or install pip packages from requirements.txt
+
+
+#2 Check for changes to the models.py, in the project root folder where manage.py is located run the following commands
+    python3 manage.py makemigrations
+    IF changes detected migrate
+    python3 manage.py migrate
+
+#3 Get data from the api
+    python3 manage.py runscript populate_FSE_db
+
+#4 Run the server
+    python3 manage.py runserver
+
