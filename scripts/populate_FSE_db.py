@@ -12,11 +12,14 @@ def add_crew_members():
             #interate through the list of crew
             for crew in launch.crew_members:
                 #get each crew member object from Crew
+                #print(crew)
                 crew_member = Crew.objects.get(id=crew)
+                
                 #add this launch object to crew list of flights
                 #To get flight out of crew_member.flights use
                 #crew_member.flights.all() || crew_member.flights.get(id=launch-id)
-                crew_member.flights.add(launch)                
+                crew_member.flights.add(launch) 
+                           
                 
                 
         
@@ -32,7 +35,6 @@ def run():
     launch_objects = []
     crew_objects = []
     payload_objects = []      
-
 
     """ Load data from the api into the database """
     #Check if we got data from payload
@@ -64,7 +66,6 @@ def run():
                 agency = crew["agency"],
                 image = crew["image"],
                 wikipedia = crew["wikipedia"],
-                launches = crew["launches"],
                 status = crew["status"],
             ))
         Crew.objects.bulk_create(crew_objects, ignore_conflicts=True)
@@ -105,8 +106,8 @@ def run():
         Payload.objects.bulk_create(payload_objects, ignore_conflicts=True)
         print("Add payload items")
 
-    if((Crew.objects) & (Launch.objects)):
-        add_crew_members()
+    
+    add_crew_members()
 
 
 

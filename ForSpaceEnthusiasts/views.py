@@ -26,6 +26,8 @@ def Crews(request):
     #get data from the model
     crews = Crew.objects.order_by("name")
     #pass results as context as list
+    for crew in crews:
+        print(crew.flights)
     context = {'crew_list' : crews}
     #ship it off to the template
     return render(request, template_name, context)   

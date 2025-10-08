@@ -9,8 +9,16 @@
                     <div class = "containers">
                         <h3>{{crew.name}}</h3>
                         <p>Agency: {{crew.agency}}
+                        {%if crew.flights.all%}
+                            {%for flight in crew.flights.all%}
+                                <p>Flew on {{flight.name}} launching on the {{flight.date_unix}}</p>
+                            {%endfor%}
+                        {%else %}
+                        <p>Hasn't flown</p>
+                        {%endif%}
                         <p>To learn more view their wikipedia page <a href="{{crew.wikipedia}}">here</a></p>
                     </div>
+
                 {% endfor %}
             {% else %}
                 <h3>Unable to load data, please try again later</h3>

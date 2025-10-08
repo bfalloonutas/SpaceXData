@@ -14,4 +14,3 @@ def get_data(page):
 
 
     
-
