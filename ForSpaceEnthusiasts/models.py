@@ -12,7 +12,7 @@ class Launch(models.Model):
     success = models.BooleanField(null=True)
     failures = models.JSONField(null=True)
     details = models.CharField(max_length=1000, null=True)
-    flight_number = models.IntegerField(default=0)
+    flight_number = models.IntegerField()
     name = models.CharField()
     cores = models.JSONField(null=True)
 
