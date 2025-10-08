@@ -10,17 +10,11 @@ def get_data(page):
         json_data = response.json()
         return json_data
     else:
-        error_msg = "Could not fetch data on" + page
+        error_msg = "Could not fetch data on " + page
         return error_msg
 
 
     
-""" launches = get_data("launches")
-
-for launch in launches:
-    print(launch["name"])
-    print("+")
-  """
 
 
 

@@ -22,29 +22,16 @@ def Launches(request):
     return render(request, template_name, context)
         
 def Crews(request):
-    
     template_name = template_base + "crew.html"
-    #get data from the api, pass in the last part of url
-    """ crews = get_data('crew')
-    #Sort crew by name,
-    crews_sorted = sorted(crews, key=lambda crew: crew["name"]) """
     #get data from the model
     crews = Crew.objects.order_by("name")
-
     #pass results as context as list
     context = {'crew_list' : crews}
     #ship it off to the template
-    return render(request, template_name, context)
-    
-    
-    
+    return render(request, template_name, context)   
 
 def Payloads(request):
     template_name = template_base + "payload.html"
-    #get data from the api, pass in the last part of url
-    """     payloads = get_data('payloads')
-    #Sort payloads by name
-    payloads_sorted = sorted(payloads, key=lambda payload: payload["name"]) """
     #Get data from the model
     payloads = Payload.objects.order_by("name")
     #pass results as context as list

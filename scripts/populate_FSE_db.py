@@ -14,25 +14,7 @@ def run():
 
     launch_objects = []
     crew_objects = []
-    payload_objects = []
-    """ Drop database before loading new date """
-    #Remove Launch data from previous load in the database
-    if(Launch.objects.exists()):
-        launches = Launch.objects.all()
-        launches.delete()
-        
-
-    #Remove Crew data from previous load in the database
-    if(Crew.objects.exists()):
-        crews = Crew.objects.all()
-        crews.delete()
-        
-
-    #Remove Payload data from previous load in the database
-    if(Payload.objects.exists()):
-        payloads = Payload.objects.all()
-        payloads.delete()
-        
+    payload_objects = []      
 
 
     """ Load data from the api into the database """
@@ -93,8 +75,8 @@ def run():
         ))
     
 
-    Launch.objects.bulk_create(launch_objects)
-    Crew.objects.bulk_create(crew_objects)
-    Payload.objects.bulk_create(payload_objects)
+    Launch.objects.bulk_create(launch_objects, ignore_conflicts=True)
+    Crew.objects.bulk_create(crew_objects, ignore_conflicts=True)
+    Payload.objects.bulk_create(payload_objects, ignore_conflicts=True)
     print("1")
     

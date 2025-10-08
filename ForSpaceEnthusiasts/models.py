@@ -6,8 +6,8 @@ import json
 class Launch(models.Model):
     id = models.CharField(primary_key=True)
     links = models.JSONField( null=True)
-    date_unix = models.DateTimeField(null=True)
-    window = models.IntegerField(null=True, blank=True)
+    date_unix = models.DateTimeField()
+    window = models.IntegerField(null=True)
     rocket = models.CharField(null=True)
     success = models.BooleanField(null=True)
     failures = models.JSONField(null=True)
@@ -16,14 +16,20 @@ class Launch(models.Model):
     name = models.CharField()
     cores = models.JSONField(null=True)
 
+    def __str__(self):
+        return f"{self.name} - {self.id} - {self.date_unix.strftime('%Y-%m-%d %H:%M:%S%z')}"
+
 class Crew(models.Model):
     id = models.CharField(primary_key=True)
     name = models.CharField()
     agency = models.CharField()
-    image = models.CharField(null=True, blank=True)
-    wikipedia = models.URLField(null=True, blank=True)
+    image = models.CharField(null=True)
+    wikipedia = models.URLField(null=True)
     launches = models.JSONField()
-    status = models.CharField() 
+    status = models.CharField(null=True) 
+
+    def __str__(self):
+        return f"{self.name} - {self.id} - {self.agency}"
     
 class Payload(models.Model):
         id = models.CharField(primary_key=True)
@@ -31,30 +37,35 @@ class Payload(models.Model):
         name = models.CharField()
         type = models.CharField()
         reused = models.BooleanField()
+        #launch id FK
         launch = models.CharField()
         customers = models.JSONField()
         norad_ids = models.JSONField()
         nationalities = models.JSONField()
         manufacturers = models.JSONField()
-        mass_kg = models.FloatField(null=True, blank=True)
-        mass_lbs = models.FloatField(null=True, blank=True)
-        orbit = models.CharField(null=True, blank=True)  
-        reference_system = models.CharField(null=True, blank=True)
-        regime  = models.CharField(null=True, blank=True)
-        longitude = models.FloatField(null=True, blank=True)
-        semi_major_axis_km = models.FloatField(null=True, blank=True)
-        eccentricity = models.FloatField(null=True, blank=True)
-        periapsis_km = models.FloatField(null=True, blank=True)
-        apoapsis_km = models.FloatField(null=True, blank=True)
-        inclination_deg = models.FloatField(null=True, blank=True)
-        period_min = models.FloatField(null=True, blank=True)
-        lifespan_years = models.FloatField(null=True, blank=True)
-        epoch = models.DateTimeField(null=True, blank=True)
-        mean_motion = models.FloatField(null=True, blank=True)
-        raan = models.FloatField(null=True, blank=True)
-        arg_of_pericenter = models.FloatField(null=True, blank=True)
-        mean_anomaly = models.IntegerField(null=True, blank=True)
+        mass_kg = models.FloatField(null=True)
+        mass_lbs = models.FloatField(null=True)
+        orbit = models.CharField(null=True)  
+        reference_system = models.CharField(null=True)
+        regime  = models.CharField(null=True)
+        longitude = models.FloatField(null=True)
+        semi_major_axis_km = models.FloatField(null=True)
+        eccentricity = models.FloatField(null=True)
+        periapsis_km = models.FloatField(null=True)
+        apoapsis_km = models.FloatField(null=True)
+        inclination_deg = models.FloatField(null=True)
+        period_min = models.FloatField(null=True)
+        lifespan_years = models.FloatField(null=True)
+        epoch = models.DateTimeField(null=True)
+        mean_motion = models.FloatField(null=True)
+        raan = models.FloatField(null=True)
+        arg_of_pericenter = models.FloatField(null=True)
+        mean_anomaly = models.IntegerField(null=True)
+
+        def __str__(self):
+            return f"{self.name} - {self.id} - {self.type}"
         
+#Create joining table for crew to flight, so that crew can display list of flights
 """ s Crew_Launch(models.Model):
     flight id FK
     crew id FK """
@@ -64,5 +75,5 @@ class Payload(models.Model):
 
 
 """ class Payload(models.Model)
-    launch id FK
+    
  """
