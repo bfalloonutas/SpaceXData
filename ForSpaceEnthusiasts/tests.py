@@ -6,19 +6,21 @@ from .models import Launch, Payload, Crew
 
 # Create your tests here.
 
-def create_launch(id):
+def create_launch(id, crews):
     return Launch.objects.create(
             name="Flight Name",
             id = id,
             success = True,
+            flight_number = 1,
+            crew_members = crews,
             date_unix = datetime.fromtimestamp(1143239400)
         )
+
 def create_crew(id):
     return Crew.objects.create(
             name="Bugs Bunny",
             id =id,
-            agency = "Looney Tunes",
-            launches = []
+            agency = "Looney Tunes"
         )
 def create_payload(id):
     return Payload.objects.create(
@@ -36,23 +38,20 @@ def create_payload(id):
 
 class LaunchModelTests(TestCase):
     #Test that Launch can create an object with valid variables
-
-        
     def test_create_launch(self):
-        launch = create_launch("1")
+        launch = create_launch("1", ["1", "2"])
         self.assertEqual(launch.name, "Flight Name")
         self.assertTrue(launch.success)
         self.assertEqual(launch.id, "1")
+        self.assertListEqual(launch.crew_members, ["1", "2"])
         self.assertEqual(launch.date_unix, datetime(2006, 3, 24, 22, 30))
 
     #test that __str__ returns expected results
     def test_str_method_launch(self):
-        launch = create_launch("1")
+        launch = create_launch("1", ["1"])
         expected_string = "Flight Name - 1 - 2006-03-24 22:30:00"
 
         self.assertEqual(str(launch), expected_string)
-
-
 
 class CrewModelTests(TestCase):
     #Test that Crew can create an object with valid variables
@@ -68,9 +67,9 @@ class CrewModelTests(TestCase):
         excepted_string = "Bugs Bunny - 1 - Looney Tunes"
 
         self.assertEqual(str(crew), excepted_string)
-        
 
-     
+
+             
 class PayloadModelTests(TestCase):
     #Test that Crew can create an object with valid variables        
     def test_create_payload(self):
@@ -88,9 +87,7 @@ class PayloadModelTests(TestCase):
         payload = create_payload("1")
         excepted_string = "BugsBunny-01 - 1 - cartoon"
         self.assertEqual(str(payload), excepted_string)
-
-
-    
+   
 class APITests(TestCase):
     #Test that we get data back from the api when we have a valid search
     def test_get_data_launch(self):
@@ -111,7 +108,6 @@ class APITests(TestCase):
     def test_data_invalid(self):
         json_data = get_data("launch")
         self.assertEqual(json_data, False)
-
 
 class TestLoadData(TestCase):
     #Check that duplicate data is not loaded into the database
@@ -151,12 +147,16 @@ class TestLoadData(TestCase):
             name="Flight Name",
             id = "1",
             success = True,
+            flight_number=1,
+            crew_members = ["1"],
             date_unix = datetime.fromtimestamp(1143239400)
         ))
         launch_object.append(Launch(
             name="Flight Name",
             id = "1",
             success = True,
+            flight_number=1,
+            crew_members = ["1"],
             date_unix = datetime.fromtimestamp(1143239400)
         ))
 
@@ -169,13 +169,11 @@ class TestLoadData(TestCase):
             name="Bugs Bunny",
             id = "1",
             agency = "Looney Tunes",
-            launches = []
         ))
         crew_object.append(Crew(
             name="Bugs Bunny",
             id = "1",
             agency = "Looney Tunes",
-            launches = []
         ))
         Crew.objects.bulk_create(crew_object, ignore_conflicts=True)
         self.assertEqual(Crew.objects.count(), 1)
@@ -195,19 +193,13 @@ class LaunchViewTests(TestCase):
         self.assertContains(response, "Unable to load data, please try again later")      
     
     def test_context_launches(self):
-        launch = create_launch("1")
+        launch = create_launch("1", ["1"])
         response = self.client.get(reverse('Launches'))  
         self.assertQuerySetEqual(
             response.context["launches_list"],
             [launch],
         )      
-       
-
-        
-"""    
-    
-    def test_template_launches(self):"""
-    
+   
 class CrewViewTests(TestCase):
     def test_view_status_crew(self):
         response = self.client.get(reverse('Crews'))       
@@ -225,8 +217,7 @@ class CrewViewTests(TestCase):
             response.context["crew_list"],
             [crew],
         )
-    """
-    def test_template_crew(self):"""
+ 
     
 class PayloadViewTests(TestCase):
     def test_view_status_payload(self):
@@ -246,5 +237,4 @@ class PayloadViewTests(TestCase):
             response.context["payload_list"],
             [payload],
         )
-
 

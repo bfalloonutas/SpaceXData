@@ -1,9 +1,25 @@
-import requests
-import os
-import django
 from ForSpaceEnthusiasts.apiClient import get_data
 from ForSpaceEnthusiasts.models import Launch, Crew, Payload
 from datetime import datetime
+
+def add_crew_members():
+    launches = Launch.objects.all()
+
+    #iterate through the list of all launches
+    for launch in launches:
+        #Check if list of crew contains crew member
+        if(launch.crew_members):
+            #interate through the list of crew
+            for crew in launch.crew_members:
+                #get each crew member object from Crew
+                crew_member = Crew.objects.get(id=crew)
+                #add this launch object to crew list of flights
+                #To get flight out of crew_member.flights use
+                #crew_member.flights.all() || crew_member.flights.get(id=launch-id)
+                crew_member.flights.add(launch)                
+                
+                
+        
 
 
 def run():
@@ -12,6 +28,7 @@ def run():
     crews = get_data("crew")
     payloads = get_data("payloads")
 
+
     launch_objects = []
     crew_objects = []
     payload_objects = []      
@@ -19,7 +36,7 @@ def run():
 
     """ Load data from the api into the database """
     #Check if we got data from payload
-    if (launch):
+    if (launches):
         for launch in launches:
             launch_objects.append(Launch(
                 id = launch["id"],
@@ -32,13 +49,14 @@ def run():
                 details = launch["details"],
                 flight_number = launch["flight_number"],
                 name = launch["name"],
-                cores = launch["cores"],)
+                cores = launch["cores"],
+                crew_members = launch["crew"])
             )
         Launch.objects.bulk_create(launch_objects, ignore_conflicts=True)
         print("Add launch items")
     
     #Check if we got data from payload
-    if (crew):
+    if (crews):
         for crew in crews:
             crew_objects.append(Crew(
                 id = crew["id"],
@@ -52,7 +70,7 @@ def run():
         Crew.objects.bulk_create(crew_objects, ignore_conflicts=True)
         print("Add crew items")
     #Check if we got data from payload
-    if (payload):
+    if (payloads):
         for payload in payloads:
             payload_objects.append(Payload(
                 id = payload["id"],
@@ -86,6 +104,11 @@ def run():
             ))
         Payload.objects.bulk_create(payload_objects, ignore_conflicts=True)
         print("Add payload items")
+
+    if((Crew.objects) & (Launch.objects)):
+        add_crew_members()
+
+
 
 print("Finished script to load data into db")
 

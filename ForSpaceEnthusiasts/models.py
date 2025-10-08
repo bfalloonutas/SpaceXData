@@ -15,6 +15,7 @@ class Launch(models.Model):
     flight_number = models.IntegerField()
     name = models.CharField()
     cores = models.JSONField(null=True)
+    crew_members = models.JSONField(null=True)
 
     def __str__(self):
         return f"{self.name} - {self.id} - {self.date_unix.strftime('%Y-%m-%d %H:%M:%S%z')}"
@@ -25,8 +26,8 @@ class Crew(models.Model):
     agency = models.CharField()
     image = models.CharField(null=True)
     wikipedia = models.URLField(null=True)
-    launches = models.JSONField()
     status = models.CharField(null=True) 
+    flights = models.ManyToManyField(Launch)
 
     def __str__(self):
         return f"{self.name} - {self.id} - {self.agency}"
@@ -64,16 +65,5 @@ class Payload(models.Model):
 
         def __str__(self):
             return f"{self.name} - {self.id} - {self.type}"
-        
-#Create joining table for crew to flight, so that crew can display list of flights
-""" s Crew_Launch(models.Model):
-    flight id FK
-    crew id FK """
-
-
-
-
-
-""" class Payload(models.Model)
     
- """
+    
