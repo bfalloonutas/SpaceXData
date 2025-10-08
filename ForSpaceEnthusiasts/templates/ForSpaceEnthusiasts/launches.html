@@ -4,22 +4,26 @@
      
     <div class="content">
     <h1 class="title">This is the Launches Page<h1>
-                {% for launch in launches_list%}
-                    <div class = "containers">
-                        {% if launch.links.patch.small is not None %}
-                        <img src={{launch.links.patch.small}} alt="Flight icon">
-                        {% endif %}
-                        {% if launch.flight_number is not None%}
-                        <h3>Flight number {{launch.flight_number}}</h3>
-                        {% else %}
-                        <h3>Flight number could not be found</h3>
-                        {% endif %}
-                        <p>Name: {{launch.name}}</p>
-                        <p>Launched on: {{launch.date_unix}}</p>
-                        {% if launch.details is not None%}
-                        <p>{{launch.details}}</p>
-                        {% endif %}
-                    </div>
-                {% endfor %}    
+        {%if launches_list%}
+            {% for launch in launches_list%}
+                <div class = "containers">
+                    {% if launch.links.patch.small is not None %}
+                    <img src={{launch.links.patch.small}} alt="Flight icon">
+                    {% endif %}
+                    {% if launch.flight_number is not None%}
+                    <h3>Flight number {{launch.flight_number}}</h3>
+                    {% else %}
+                    <h3>Flight number could not be found</h3>
+                    {% endif %}
+                    <p>Name: {{launch.name}}</p>
+                    <p>Launched on: {{launch.date_unix}}</p>
+                    {% if launch.details is not None%}
+                    <p>{{launch.details}}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}    
+        {% else %}
+            <h3>Unable to load data, please try again later</h3>
+        {%endif%}
     <div>
 {% endblock content %}

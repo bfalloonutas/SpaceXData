@@ -4,6 +4,7 @@
     
     <div class="content">
         <h1 class="title">Crew<h1>
+            {%if crew_list%}
                 {% for crew in crew_list%}
                     <div class = "containers">
                         {% if crew.name is not None %}
@@ -13,6 +14,9 @@
                         <p>Agency: {{crew.agency}}
                         <p>To learn more view their wikipedia page <a href="{{crew.wikipedia}}">here</a></p>
                     </div>
-                {% endfor %}    
+                {% endfor %}
+            {% else %}
+                <h3>Unable to load data, please try again later</h3>
+            {%endif%}   
     </div>
 {% endblock content %}

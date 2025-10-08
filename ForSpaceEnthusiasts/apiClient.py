@@ -10,8 +10,7 @@ def get_data(page):
         json_data = response.json()
         return json_data
     else:
-        error_msg = "Could not fetch data on " + page
-        return error_msg
+        return False
 
 
     

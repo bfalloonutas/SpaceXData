@@ -110,7 +110,7 @@ class APITests(TestCase):
     #a valid search query
     def test_data_invalid(self):
         json_data = get_data("launch")
-        self.assertEqual(json_data, "Could not fetch data on launch")
+        self.assertEqual(json_data, False)
 
 
 class TestLoadData(TestCase):
@@ -192,7 +192,7 @@ class LaunchViewTests(TestCase):
     def test_context_no_launches(self):
         response = self.client.get(reverse('Launches'))        
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "No Launches Found, please try reloading")
+        self.assertContains(response, "Unable to load data, please try again later")      
     
     def test_context_launches(self):
         launch = create_launch("1")
@@ -216,7 +216,7 @@ class CrewViewTests(TestCase):
     def test_context_no_crew(self):
         response = self.client.get(reverse('Crews')) 
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "No Crew Found, please try reloading")      
+        self.assertContains(response, "Unable to load data, please try again later")      
      
     def text_context_crew(self):
         crew = create_crew("1")
@@ -237,7 +237,7 @@ class PayloadViewTests(TestCase):
     def test_context_no_payload(self):
         response = self.client.get(reverse('Payloads')) 
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "No payload Found, please try reloading")      
+        self.assertContains(response, "Unable to load data, please try again later")      
      
     def text_context_payload(self):
         payload = create_payload("1")
