@@ -7,7 +7,8 @@
                     <div class = "containers">
                         <h3>Payload: {{payload.name}}</h3>
                         <p>Type: {{payload.type}}
-                        <p>Launched on flight: {{payload.launch.flight_number}} | {{payload.launch.name}}</p>
+                        <p>Launched on flight:</p> 
+                            <p>{{payload.launch.flight_number}} | {{payload.launch.name}} | {{payload.launch.date_unix}}</p>
                         {% for manufacturer in payload.manufacturers %}
                             <p>Manufacturer: {{ manufacturer }}</p>
                         {% empty %}

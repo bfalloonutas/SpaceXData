@@ -1,7 +1,6 @@
 from django.shortcuts import render
-from .apiClient import get_data
 from .models import Launch, Crew, Payload
-from datetime import datetime
+
 # Create your views here.
 
 template_base = "ForSpaceEnthusiasts/"
