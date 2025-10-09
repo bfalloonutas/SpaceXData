@@ -9,7 +9,7 @@ A Django project that displays data from the SpaceX API.
     - Views query the local database.
 
 - base
-    - hmtl boilerplate for the rest of templates.
+    - html boilerplate for the rest of templates.
     - contains the navigation bar.
 - Home Page
     - summary.
@@ -58,8 +58,22 @@ A Django project that displays data from the SpaceX API.
 
     `python3 manage.py runserver`
 
-Comments
+# Comments
 
-- In the get_spaceX_data command, payloads without an associated launch object are skipped and not add to the database.
-- This was done because it appears that Payload has a one-to-many relationship with Launch. Each payload requires a launch object.
-- Payloads with invalid or missing launch ids are ignored to ensure database integrity.
+## Assumptions about the data:
+
+Each payload has a corresponding launch.
+
+    In the get_spaceX_data command, payloads without an associated launch object are skipped and not added to the database.
+
+    Payloads with invalid or missing launch ids are ignored to ensure database integrity.
+
+    Further discussion: in the JSON data, a payload’s launch attribute is a dictionary item (each payload has only one launch). Each payload has a launch id that appears valid but doesn’t match any existing launch id (confirmed by manually inspecting the JSON data and searching through Launch.objects).
+
+A crew member may fly on one or more flights.
+
+All launches from the API have already taken place.
+
+The data from the API will not be modified
+
+
