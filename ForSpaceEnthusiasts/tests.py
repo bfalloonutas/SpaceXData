@@ -4,8 +4,7 @@ from datetime import datetime
 from .apiClient import get_data
 from .models import Launch, Payload, Crew
 
-# Create your tests here.
-
+#util functions
 def create_launch(id, crews):
     return Launch.objects.create(
             name="Flight Name",
@@ -23,18 +22,24 @@ def create_crew(id):
             agency = "Looney Tunes"
         )
 def create_payload(id):
+    #payload object requires a launch objects
+    l = create_launch("1", ["1"])
     return Payload.objects.create(
             id = id,
             dragon = [],
             name="BugsBunny-01",
             type = "cartoon",
             reused = True,
-            launch ="1",
+            launch = l,
             customers = ["children"],
             norad_ids = [30000],
             nationalities=["United States"],
             manufacturers = [],
         )
+
+# Create your tests here.
+
+
 
 class LaunchModelTests(TestCase):
     #Test that Launch can create an object with valid variables
@@ -71,13 +76,15 @@ class CrewModelTests(TestCase):
 
              
 class PayloadModelTests(TestCase):
-    #Test that Crew can create an object with valid variables        
+    #Test that Payload can create an object with valid variables        
     def test_create_payload(self):
         payload = create_payload("1")
+        # get id oflaunch out of payload
+        l = payload.launch.id
         self.assertEqual(payload.name, "BugsBunny-01")
         self.assertEqual(payload.id, "1")
-        self.assertTrue(payload.reused, True)
-        self.assertEqual(payload.launch, "1")
+        self.assertTrue(payload.reused, True)     
+        self.assertEqual(payload.launch, Launch.objects.get(id=l))
         self.assertEqual(payload.customers, ["children"])
         self.assertEqual(payload.norad_ids, [30000])
         self.assertEqual(payload.nationalities, ["United States"])
@@ -113,6 +120,7 @@ class TestLoadData(TestCase):
     #Check that duplicate data is not loaded into the database
     #Set up so that it copies the behaviour of populate_FSE_db script
     def test_dup_data_payload(self):
+        l=create_launch("1", [])
         payload_object = []
         payload_object.append(Payload(
             id = "1",
@@ -120,7 +128,7 @@ class TestLoadData(TestCase):
             name="BugsBunny-01",
             type = "cartoon",
             reused = True,
-            launch ="1",
+            launch =Launch.objects.get(id=l),
             customers = ["children"],
             norad_ids = [30000],
             nationalities=["United States"],
@@ -131,7 +139,7 @@ class TestLoadData(TestCase):
             name="BugsBunny-02",
             type = "cartoon2",
             reused = True,
-            launch ="1",
+            launch =Launch.objects.get(id=l),
             customers = ["childrens"],
             norad_ids = [40000],
             nationalities=["America"],
@@ -223,7 +231,6 @@ class PayloadViewTests(TestCase):
     def test_view_status_payload(self):
         response = self.client.get(reverse('Payloads'))       
         self.assertEqual(response.status_code, 200)
-        crew = create_crew("1")
 
     def test_context_no_payload(self):
         response = self.client.get(reverse('Payloads')) 

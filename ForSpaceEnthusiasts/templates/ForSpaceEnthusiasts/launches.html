@@ -13,9 +13,16 @@
                     <h3>Flight number {{launch.flight_number}}</h3>
                     <p>Name: {{launch.name}}</p>
                     <p>Launched on: {{launch.date_unix}}</p>
+                    {% if launch.payload.all is not None%}
+                        {% for payload in launch.payload.all%}
+                            <p>Launched with payload: {{payload.name}}<p>
+                        {% endfor %}
+                    {% else %}
+                        <p>Flight launched with no payload</p>
+                    {%endif%}
                     {% if launch.details is not None%}
-                    <p>{{launch.details}}</p>
-                    {% endif %}
+                        <p>{{launch.details}}</p>
+                    {% endif %} 
                 </div>
             {% endfor %}    
         {% else %}

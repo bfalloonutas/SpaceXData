@@ -7,10 +7,11 @@
                     <div class = "containers">
                         <h3>Payload: {{payload.name}}</h3>
                         <p>Type: {{payload.type}}
+                        <p>Launched on flight: {{payload.launch.flight_number}} | {{payload.launch.name}}</p>
                         {% for manufacturer in payload.manufacturers %}
-                        <p>Manufacturer: {{ manufacturer }} 
+                            <p>Manufacturer: {{ manufacturer }}</p>
                         {% empty %}
-                        <p>No listed manufacturer</p>
+                            <p>No listed manufacturer</p>
                         {% endfor %}
                     </div>
                 {% endfor %}  

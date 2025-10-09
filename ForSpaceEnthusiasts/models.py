@@ -38,8 +38,7 @@ class Payload(models.Model):
         name = models.CharField()
         type = models.CharField()
         reused = models.BooleanField()
-        #launch id FK
-        launch = models.CharField()
+        launch = models.ForeignKey(Launch, on_delete=models.CASCADE, related_name="payload")
         customers = models.JSONField()
         norad_ids = models.JSONField()
         nationalities = models.JSONField()

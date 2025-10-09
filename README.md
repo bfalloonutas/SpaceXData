@@ -32,3 +32,8 @@ Run application
 #4 Run the server
     python3 manage.py runserver
 
+
+
+Comments
+
+In populate_FSE_db script payloads with an associated launch object are skipped and not add to the database, this was done because it appears that Payload has a oneToMany associate with Launch. Because of this payload must have launch objected passed to it to create a new payload object, as some launch id's don't corespond to a launch object I decided the simplest solution would be to simply pass over those payloads and only create payloads that have a valid launch id.
