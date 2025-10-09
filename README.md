@@ -37,27 +37,28 @@ A Django project that displays data from the SpaceX API.
 
     Chatgpt to assist in generate testing cases eg. (`test_create_payload`, `test_context_launches etc`) to ensure proper coverage.
 
-Setup and Local Execution:
-    1. Enter project root directory
+# Setup and Local Execution:
+    
+1. Enter project root directory
     IF you use .venv for python virtual environments, first enter the virtual environment with
         `source .venv/bin/activate`
 
-    2. Install dependencies
+2. Install dependencies
     
-        `pip install --upgrade -r requirements.txt`
+    `pip install --upgrade -r requirements.txt`
 
-    3. Set up the datebase
-        `python3 manage.py makemigrations`
-        `python3 manage.py migrate`
+3. Set up the datebase
+    `python3 manage.py makemigrations`
+    `python3 manage.py migrate`
 
-    4 Fetch data from API
-        `python3 manage.py get_spaceX_data`
+4. Fetch data from API
+    `python3 manage.py get_spaceX_data`
 
-    5. Run the development server
-        `python3 manage.py runserver`
+5. Run the development server
+    `python3 manage.py runserver`
 
 Comments
 
 - In the get_spaceX_data command, payloads without an associated launch object are skipped and not add to the database.
-- this was done because it appears that Payload has a one-to-many relationship with Launch. Each payload requires a launch object.
+- This was done because it appears that Payload has a one-to-many relationship with Launch. Each payload requires a launch object.
 - Payloads with invalid or missing launch ids are ignored to ensure database integrity.
