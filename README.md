@@ -42,7 +42,7 @@ A Django project that displays data from the SpaceX API.
 1. Enter project root directory
 
 2. Install dependencies
-    
+    x
     `pip install --upgrade -r requirements.txt`
 
 3. Set up the datebase

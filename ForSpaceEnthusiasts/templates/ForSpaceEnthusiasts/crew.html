@@ -11,7 +11,8 @@
                         <p>Agency: {{crew.agency}}
                         {%if crew.flights.all%}
                             {%for flight in crew.flights.all%}
-                                <p>Flew on {{flight.name}} launching on the {{flight.date_unix}}</p>
+                                <p>Crew on: {{flight.name}}<p>
+                                <p>launching on {{flight.date_unix}}</p>
                             {%endfor%}
                         {%else %}
                         <p>Hasn't flown</p>

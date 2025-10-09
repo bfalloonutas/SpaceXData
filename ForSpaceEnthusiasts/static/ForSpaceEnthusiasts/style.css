@@ -69,6 +69,14 @@ body {
 
 .containers a {
     text-decoration: none;
-    
 }
 
+.containers ul{
+    margin: 10px 0 5px;
+}
+
+.containers li{
+    margin: 15px;
+    font-size: 14px;
+    color: #555; 
+}
