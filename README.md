@@ -40,21 +40,25 @@ A Django project that displays data from the SpaceX API.
 # Setup and Local Execution:
     
 1. Enter project root directory
-    IF you use .venv for python virtual environments, first enter the virtual environment with
-        `source .venv/bin/activate`
+    IF you use .venv for python virtual environments, first enter the virtual environment
+
+    `source .venv/bin/activate`
 
 2. Install dependencies
     
     `pip install --upgrade -r requirements.txt`
 
 3. Set up the datebase
+
     `python3 manage.py makemigrations`
     `python3 manage.py migrate`
 
 4. Fetch data from API
+
     `python3 manage.py get_spaceX_data`
 
 5. Run the development server
+
     `python3 manage.py runserver`
 
 Comments
