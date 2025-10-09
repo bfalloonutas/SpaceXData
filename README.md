@@ -40,9 +40,6 @@ A Django project that displays data from the SpaceX API.
 # Setup and Local Execution:
     
 1. Enter project root directory
-    IF you use .venv for python virtual environments, first enter the virtual environment
-
-    `source .venv/bin/activate`
 
 2. Install dependencies
     
